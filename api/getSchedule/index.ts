@@ -9,7 +9,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       `Triggering Post for University of Florida ${event.sport.title} game vs ${event.opponent.title}`
     );
 
-    return fetch("http://localhost:3000/api/post", {
+    return fetch("http://localhost:3000/api/buildPrompt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
