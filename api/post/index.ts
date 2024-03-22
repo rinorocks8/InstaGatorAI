@@ -18,23 +18,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   });
 }
 
-const postMediaContainerToInstagram = async (media_id: string) => {
-  const post = await fetch(
-    `https://graph.facebook.com/v19.0/${instagram_business_account_id}/media_publish?creation_id=${media_id}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        access_token: accessToken,
-      }),
-    }
-  );
-  const postRes = await post.json();
-  return postRes;
-};
-
 const createInstagramMediaContainer = async (
   photoURL: string,
   caption: string
@@ -56,6 +39,23 @@ const createInstagramMediaContainer = async (
   );
   const postRes = await post.json();
   return postRes.id;
+};
+
+const postMediaContainerToInstagram = async (media_id: string) => {
+  const post = await fetch(
+    `https://graph.facebook.com/v19.0/${instagram_business_account_id}/media_publish?creation_id=${media_id}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        access_token: accessToken,
+      }),
+    }
+  );
+  const postRes = await post.json();
+  return postRes;
 };
 
 function removeQuotes(inputString: string) {
