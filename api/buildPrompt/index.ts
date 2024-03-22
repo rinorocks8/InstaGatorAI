@@ -41,24 +41,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     ),
   ]);
 
-  // const image = await fetch("http://localhost:3000/api/requestDalle", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     prompt: dallePrompt,
-  //   }),
-  // });
-  // return res.status(200).send({
-  //   caption: caption,
-  //   image: await image.json(),
-  // });
-
-  return res.status(200).send({
-    caption: caption,
-    dallePrompt: dallePrompt,
+  const image = await fetch("http://localhost:3000/api/requestDalle", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: `University of Florida ${event.sport.title} game vs ${event.opponent.title}`,
+      prompt: dallePrompt,
+    }),
   });
+
+  const post = await fetch("http://localhost:3000/api/post", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: `University of Florida ${event.sport.title} game vs ${event.opponent.title}`,
+      caption: caption,
+      imageURL: (await image.json()).message,
+    }),
+  });
+
+  return res.status(200).send({});
 }
 
 async function generatePrompt(prompt: string) {
