@@ -5,17 +5,24 @@ const instagram_business_account_id = "17841464631072740";
 const accessToken = process.env["META_ACCESS_TOKEN"] ?? "";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const { caption, imageURL, name } = req.body;
+  try {
+    const { caption, imageURL, name } = req.body;
 
-  console.log("Uploading Post for", name);
+    console.log("Uploading Post for", name);
 
-  const media_id = await createInstagramMediaContainer(imageURL, caption);
-  const postRes = await postMediaContainerToInstagram(media_id);
+    const media_id = await createInstagramMediaContainer(imageURL, caption);
+    const postRes = await postMediaContainerToInstagram(media_id);
 
-  return res.status(200).send({
-    post_res: postRes,
-    image_url: imageURL,
-  });
+    return res.status(200).send({
+      post_res: postRes,
+      image_url: imageURL,
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).send({
+      error: "Internal Server Error",
+    });
+  }
 }
 
 const createInstagramMediaContainer = async (
