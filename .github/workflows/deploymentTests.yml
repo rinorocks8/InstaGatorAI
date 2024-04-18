@@ -1,0 +1,15 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  tests:
+    name: End-to-end tests
+    runs-on: ubuntu-latest
+    steps:
+      - run: npm install --include=dev
+      - run: npm run test
