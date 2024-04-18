@@ -11,5 +11,6 @@ jobs:
     name: End-to-end tests
     runs-on: ubuntu-latest
     steps:
+      - run: ls
       - run: cd .. && npm install --include=dev
       - run: cd .. && npm run test
