@@ -1,16 +1,17 @@
-name: ci
+name: Node.js CI
 
-on:
-  push:
-  pull_request:
-    branches:
-      - "**"
+on: [push]
 
 jobs:
-  tests:
-    name: End-to-end tests
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - run: ls
-      - run: cd .. && npm install --include=dev
-      - run: cd .. && npm run test
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+      - run: npm install --dev
+      - run: npm run
+      - run: npm run test
