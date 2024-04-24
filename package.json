@@ -1,0 +1,44 @@
+{
+  "name": "instagatorai",
+  "private": true,
+  "devDependencies": {
+    "@types/facebook-js-sdk": "^3.3.10",
+    "@types/fb": "^0.0.28",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^17.0.42",
+    "@vercel/node": "^2.9.6",
+    "jest": "^29.7.0",
+    "start-server-and-test": "^2.0.3",
+    "ts-jest": "^29.1.2",
+    "ts-node": "latest",
+    "typescript": "^5.4.4"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "fb": "^2.0.0",
+    "fbgraph": "^1.4.4",
+    "html-to-text": "^9.0.5",
+    "https": "^1.0.0",
+    "jest-mock": "^29.7.0",
+    "openai": "^4.24.7",
+    "puppeteer": "^21.7.0",
+    "url": "^0.11.3"
+  },
+  "scripts": {
+    "start": "vercel dev",
+    "test": "npx jest"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testMatch": [
+      "**/?(*.)+(spec|test).ts"
+    ],
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ]
+  }
+}
